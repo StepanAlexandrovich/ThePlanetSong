@@ -25,7 +25,9 @@ public class CanvasFrame extends JFrame {
         buttons = new ArrayList<>();
         buttons.add(helper.createButton(widthButton*0,heightCanvas,widthButton,heightButton,PS.CYCLE));
         buttons.add(helper.createButton(widthButton*1,heightCanvas,widthButton,heightButton,PS.NEXT));
-        buttons.add(helper.createButton(widthButton*2,heightCanvas,widthButton,heightButton,PS.EXIT));
+        buttons.add(helper.createButton(widthButton*2,heightCanvas,widthButton,heightButton,PS.SETTINGS));
+        buttons.add(helper.createButton(widthButton*3,heightCanvas,widthButton,heightButton,PS.ADD_CURRENT_SONG));
+        buttons.add(helper.createButton(widthButton*4,heightCanvas,widthButton,heightButton,PS.EXIT));
 
         // add to panel
         panel.add(label);

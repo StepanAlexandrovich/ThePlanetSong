@@ -19,6 +19,8 @@ public class MouseListenerImpl implements MouseListener {
         switch (button.getName()){
             case PS.CYCLE: main.startStop(); break;
             case PS.NEXT: main.nextSong(); break;
+            case PS.SETTINGS: main.settings(); break;
+            case PS.ADD_CURRENT_SONG: main.addCurrentSong(); break;
             case PS.EXIT: main.exit(); break;
         }
     }

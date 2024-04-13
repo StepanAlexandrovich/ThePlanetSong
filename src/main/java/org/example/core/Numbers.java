@@ -4,10 +4,10 @@ public class Numbers {
     // static
     private int distance;
     private int countOfPoints;
-    private Point[] points;
+    private Point[] points = new Point[0];
     // dynamic
     private double multiplicationHz;
-    private String mode;
+    private String mode = "";
     private int borderDown;
 
     public Numbers setDistance(int distance) {
@@ -66,8 +66,8 @@ public class Numbers {
         double result = 0;
 
         switch (mode){
-            case "UP": result = getValueUp(); break;
-            case "DOWN": result = getValueDown(); break;
+            case "BORDER_UP": result = getValueUp(); break;
+            case "BORDER_DOWN": result = getValueDown(); break;
         }
         return borderDown(result)*multiplicationHz;
     }
