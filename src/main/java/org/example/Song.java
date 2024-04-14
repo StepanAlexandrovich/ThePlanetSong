@@ -4,7 +4,7 @@ public class Song {
     private int id;
     private int lengthCycle;
     private int countOfPoints;
-    private String mode = "BORDER_DOWN";
+    private String mode = "DOWN";
     private int borderDown;
     private double multiplicationHz;
     private int volume;

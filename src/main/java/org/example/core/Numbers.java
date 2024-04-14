@@ -66,8 +66,8 @@ public class Numbers {
         double result = 0;
 
         switch (mode){
-            case "BORDER_UP": result = getValueUp(); break;
-            case "BORDER_DOWN": result = getValueDown(); break;
+            case "UP": result = getValueUp(); break;
+            case "DOWN": result = getValueDown(); break;
         }
         return borderDown(result)*multiplicationHz;
     }

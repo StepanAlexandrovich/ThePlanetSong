@@ -14,7 +14,7 @@ public class Main {
     private CanvasFrame canvasFrame = new CanvasFrame();
     private Sound sound = new Sound();
     //----------------------
-    private Settings settings = new Settings(numbers,sound,canvasFrame);
+    private UpdateCurrentSong updateCurrentSong = new UpdateCurrentSong(numbers,sound,canvasFrame);
     private QueriesToDataBase queries = new QueriesToDataBase();
     private Song current_song = null;
 
@@ -34,8 +34,8 @@ public class Main {
         //queries.createDataBase();
         queries.initialization();
 
-        settings.setSongs(queries.getSongs());
-        current_song = settings.updateSong();
+        updateCurrentSong.setSongs(queries.getSongs());
+        current_song = updateCurrentSong.updateSong();
 
         sound.open();
 
@@ -51,17 +51,17 @@ public class Main {
                     //test.test(sound);
                     break;
                 case NEXT:
-                    current_song = settings.updateSong();
+                    current_song = updateCurrentSong.updateSong();
                     mode = Mode.PROCESS;
                     break;
                 case SETTINGS:
-                    current_song = new FrameSettings().process();
-                    settings.updateSong(current_song);
+                    current_song = new FrameSettings(current_song).process();
+                    updateCurrentSong.updateSong(current_song);
                     mode = Mode.PROCESS;
                     break;
                 case ADD_CURRENT_SONG:
                     queries.addSong(current_song);
-                    settings.setSongs(queries.getSongs());
+                    updateCurrentSong.setSongs(queries.getSongs());
                     mode = Mode.PROCESS;
                     break;
 

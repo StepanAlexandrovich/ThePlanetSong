@@ -30,18 +30,6 @@ public class QueriesToDataBase {
         connection.getResultUpdate("Alter table song add column if not exists volume integer NOT NULL");
     }
 
-    public void addSong(){
-        int lengthCycle = 24;
-        int countOfPoints = 22;
-        String mode = "UP";
-        int borderDown = 0;
-        int multiplicationHz = 20;
-        int volume = 5;
-        int speed = 1000;
-
-        connection.getResultUpdate("INSERT INTO public.song(length_cycle, multiplication_hz, border_down, count_of_points, mode, speed, volume) VALUES ("+lengthCycle +","+multiplicationHz+","+borderDown+","+countOfPoints+","+"'"+mode+"'"+","+speed+","+volume+")");
-    }
-
     public void addSong(Song song){
         connection.getResultUpdate("INSERT INTO public.song(length_cycle, multiplication_hz, border_down, count_of_points, mode, speed, volume) VALUES ("+song.getLengthCycle() +","+song.getMultiplicationHz()+","+song.getBorderDown()+","+song.getCountOfPoints()+","+"'"+song.getMode()+"'"+","+song.getSpeed()+","+song.getVolume()+")");
     }
@@ -62,7 +50,7 @@ public class QueriesToDataBase {
                     song.setCountOfPoints( resultSet.getInt("count_of_points") );
                     song.setMode( resultSet.getString("mode") );
                     song.setBorderDown( resultSet.getInt("border_down") );
-                    song.setMultiplicationHz( resultSet.getInt("multiplication_hz") );
+                    song.setMultiplicationHz( resultSet.getDouble("multiplication_hz") );
                     song.setVolume( resultSet.getInt("volume") );
                     song.setSpeed( resultSet.getInt("speed") );
 
