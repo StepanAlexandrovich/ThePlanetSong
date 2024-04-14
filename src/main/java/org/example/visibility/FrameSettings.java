@@ -18,8 +18,6 @@ public class FrameSettings extends JFrame{
     private boolean process = true;
     private Song song;
 
-
-
     public FrameSettings(Song song) {
         /////////
         this.song = song;
@@ -34,12 +32,12 @@ public class FrameSettings extends JFrame{
         this.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 
         this.add(createPanel(PS.LENGTH_CYCLE,"96"));
-        this.add(createPanel(PS.COUNT_OF_POINTS,"96"));
         this.add(createPanel(PS.MODE,"DOWN"));
         this.add(createPanel(PS.BORDER_DOWN,"0"));
         this.add(createPanel(PS.MULTIPLICATION_HZ,"10"));
         this.add(createPanel(PS.VOLUME,"5"));
-        this.add(createPanel(PS.SPEED,"500"));
+        this.add(createPanel(PS.DURATION_SOUND,"300"));
+        this.add(createPanel(PS.DELAY_CYCLE,"10"));
 
         this.add(createButton("apply"));
 
@@ -78,12 +76,12 @@ public class FrameSettings extends JFrame{
             for (JTextField field : fields) {
                 switch (field.getName()){
                     case PS.LENGTH_CYCLE: song.setLengthCycle(Integer.parseInt(field.getText())); break;
-                    case PS.COUNT_OF_POINTS: song.setCountOfPoints(Integer.parseInt(field.getText())); break;
                     case PS.MODE: song.setMode(field.getText()); break;
                     case PS.BORDER_DOWN: song.setBorderDown(Integer.parseInt(field.getText())); break;
                     case PS.MULTIPLICATION_HZ: song.setMultiplicationHz(Double.parseDouble(field.getText())); break;
                     case PS.VOLUME: song.setVolume(Integer.parseInt(field.getText())); break;
-                    case PS.SPEED: song.setSpeed(Integer.parseInt(field.getText())); break;
+                    case PS.DURATION_SOUND: song.setDurationSound(Integer.parseInt(field.getText())); break;
+                    case PS.DELAY_CYCLE: song.setDelayCycle(Integer.parseInt(field.getText())); break;
                 }
             }
 

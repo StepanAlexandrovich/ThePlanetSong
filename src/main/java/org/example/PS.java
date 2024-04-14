@@ -10,10 +10,10 @@ public class PS {
 
     // song settings
     public final static String LENGTH_CYCLE = "LENGTH_CYCLE";
-    public final static String COUNT_OF_POINTS = "COUNT_OF_POINTS";
     public final static String MODE = "MODE";
     public final static String BORDER_DOWN = "BORDER_DOWN";
     public final static String MULTIPLICATION_HZ = "MULTIPLICATION_HZ";
     public final static String VOLUME = "VOLUME";
-    public final static String SPEED = "SPEED";
+    public final static String DURATION_SOUND = "DURATION_SOUND";
+    public final static String DELAY_CYCLE = "DELAY_CYCLE";
 }

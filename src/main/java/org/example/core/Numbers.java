@@ -1,13 +1,16 @@
 package org.example.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Numbers {
     // static
     private int distance;
     private int countOfPoints;
-    private Point[] points = new Point[0];
+    private List<Point> points = new ArrayList<>();
     // dynamic
     private double multiplicationHz;
-    private String mode = "";
+    private String mode = "DOWN";
     private int borderDown;
 
     public Numbers setDistance(int distance) {
@@ -35,54 +38,53 @@ public class Numbers {
     }
 
     public void apply(){
-        this.points = new Point[countOfPoints];
-        for (int i = 0; i < points.length; i++) {
-            points[i] = new Point(3);
-            points[i].setDistanceCircle(distance);
-            points[i].setDistanceNow(0);
-            points[i].setIndex(i);
-            points[i].setSpeed(i);
+        this.points = new ArrayList<>();
+        for (int speed = 1; speed < distance; speed++) {
+
+            if(distance%speed == 0){
+                Point point = new Point(3);
+
+                point.setDistanceCircle(distance);
+                point.setSpeed(speed);
+                point.setDistanceNow(0);
+                point.setIndex(speed);
+
+                points.add(point);
+            }
+
         }
     }
-
-    public Point[] getPoints() {
+    public List<Point> getPoints() {
         return points;
     }
 
-    public int[] getDistances(){
-        int[] values = new int[points.length];
-        for (int i = 0; i < points.length; i++) {
-            values[i] = (int) points[i].getDistanceNow();
-        }
-        return values;
-    }
     public void process(){
         for (Point point : points) {
             point.process();
         }
     }
 
-    public double getValue(){
-        double result = 0;
+    public int getValue(){
+        int result = 0;
 
         switch (mode){
             case "UP": result = getValueUp(); break;
             case "DOWN": result = getValueDown(); break;
         }
-        return borderDown(result)*multiplicationHz;
+        return (int)((double)borderDown(result)*multiplicationHz);
     }
-    private double getValueDown(){
+    private int getValueDown(){
         for (Point point : points) {
-            if(point.getSpeed()!=0 && point.getDistanceNow() == 0.0){
+            if(point.getSpeed()!=0 && point.getDistanceNow() == 0){
                 return point.getSpeed();
             }
         }
         return 0;
     }
-    private double getValueUp(){
-        double result = 0;
+    private int getValueUp(){
+        int result = 0;
         for (Point point : points) {
-            if(point.getSpeed()!=0 && point.getDistanceNow() == 0.0){
+            if(point.getSpeed()!=0 && point.getDistanceNow() == 0){
                 result = point.getSpeed();
             }
         }

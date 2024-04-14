@@ -8,7 +8,8 @@ public class Song {
     private int borderDown;
     private double multiplicationHz;
     private int volume;
-    private int speed;
+    private int durationSound;
+    private long delayCycle;
 
     public int getId() {
         return id;
@@ -24,14 +25,6 @@ public class Song {
 
     public void setLengthCycle(int lengthCycle) {
         this.lengthCycle = lengthCycle;
-    }
-
-    public int getCountOfPoints() {
-        return countOfPoints;
-    }
-
-    public void setCountOfPoints(int countOfPoints) {
-        this.countOfPoints = countOfPoints;
     }
 
     public String getMode() {
@@ -65,12 +58,14 @@ public class Song {
     public void setVolume(int volume) {
         this.volume = volume;
     }
+    public int getDurationSound() { return durationSound; }
+    public void setDurationSound(int durationSound) { this.durationSound = durationSound; }
 
-    public int getSpeed() {
-        return speed;
+    public long getDelayCycle() {
+        return delayCycle;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setDelayCycle(int delayCycle) {
+        this.delayCycle = delayCycle;
     }
 }

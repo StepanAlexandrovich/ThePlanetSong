@@ -11,15 +11,15 @@ public class Sound {
     private SourceDataLine sdl;
     private byte[] buf = new byte[1];
 
-    private int volume,speed;
+    private int volume,duration;
 
     public Sound setVolume(int volume) {
         this.volume = volume;
         return this;
     }
 
-    public Sound setSpeed(int speed) {
-        this.speed = speed;
+    public Sound setDuration(int duration) {
+        this.duration = duration;
         return this;
     }
 
@@ -35,7 +35,7 @@ public class Sound {
 
     public void process(int hz){
         try {
-            tone(hz,speed,volume);
+            tone(hz, duration,volume);
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }

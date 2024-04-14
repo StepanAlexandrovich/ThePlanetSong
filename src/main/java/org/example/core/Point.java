@@ -18,11 +18,11 @@ public class Point extends NextValue {
     // GET
     public int getIndex() { return index; }
 
-    public double getDistanceBack() { return distance[back]; }
-    public double getDistanceNow() {
+    public int getDistanceBack() { return distance[back]; }
+    public int getDistanceNow() {
         return distance[now];
     }
-    public double getSpeed() { return speed; }
+    public int getSpeed() { return speed; }
 
     // SET
     public void setIndex(int index) {

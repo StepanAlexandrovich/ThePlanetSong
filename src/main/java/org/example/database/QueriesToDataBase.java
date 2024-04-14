@@ -17,27 +17,28 @@ public class QueriesToDataBase {
 
     public void initialization(){
         connection.setLOGIN("postgres").setPASSWORD("1").setURL("jdbc:postgresql://localhost:5432/the_planet_song");
-        connection.getResultUpdate("CREATE TABLE IF NOT EXISTS public.song(id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (INCREMENT 1 START 1 ), PRIMARY KEY (id))");
+        connection.getResultUpdate("CREATE TABLE IF NOT EXISTS public.song_smooth(id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (INCREMENT 1 START 1 ), PRIMARY KEY (id))");
 
-        connection.getResultUpdate("Alter table song add column if not exists length_cycle integer NOT NULL");
-        connection.getResultUpdate("Alter table song add column if not exists multiplication_hz float(53) NOT NULL");
+        connection.getResultUpdate("Alter table song_smooth add column if not exists length_cycle integer NOT NULL");
+        connection.getResultUpdate("Alter table song_smooth add column if not exists multiplication_hz float(53) NOT NULL");
 
-        connection.getResultUpdate("Alter table song add column if not exists border_down integer NOT NULL");
-        connection.getResultUpdate("Alter table song add column if not exists count_of_points integer NOT NULL");
-        connection.getResultUpdate("Alter table song add column if not exists mode varchar(255) NOT NULL");
+        connection.getResultUpdate("Alter table song_smooth add column if not exists border_down integer NOT NULL");
+        connection.getResultUpdate("Alter table song_smooth add column if not exists mode varchar(255) NOT NULL");
 
-        connection.getResultUpdate("Alter table song add column if not exists speed integer NOT NULL");
-        connection.getResultUpdate("Alter table song add column if not exists volume integer NOT NULL");
+        connection.getResultUpdate("Alter table song_smooth add column if not exists duration_sound integer NOT NULL");
+        connection.getResultUpdate("Alter table song_smooth add column if not exists volume integer NOT NULL");
+
+        connection.getResultUpdate("Alter table song_smooth add column if not exists delay_cycle integer NOT NULL");
     }
 
     public void addSong(Song song){
-        connection.getResultUpdate("INSERT INTO public.song(length_cycle, multiplication_hz, border_down, count_of_points, mode, speed, volume) VALUES ("+song.getLengthCycle() +","+song.getMultiplicationHz()+","+song.getBorderDown()+","+song.getCountOfPoints()+","+"'"+song.getMode()+"'"+","+song.getSpeed()+","+song.getVolume()+")");
+        connection.getResultUpdate("INSERT INTO public.song_smooth(length_cycle, multiplication_hz, border_down, mode, duration_sound, volume, delay_cycle) VALUES ("+song.getLengthCycle() +","+song.getMultiplicationHz()+","+song.getBorderDown()+",'"+song.getMode()+"',"+song.getDurationSound()+","+song.getVolume()+","+song.getDelayCycle()+")");
     }
 
     public List<Song> getSongs(){
         List<Song> songs = new ArrayList<>();
 
-        ResultSet resultSet = connection.getResultSet("SELECT id, length_cycle, multiplication_hz, border_down, count_of_points, mode, speed, volume FROM public.song");
+        ResultSet resultSet = connection.getResultSet("SELECT id, length_cycle, multiplication_hz, border_down, mode, duration_sound, volume, delay_cycle FROM public.song_smooth");
 
         while (true){
 
@@ -47,12 +48,12 @@ public class QueriesToDataBase {
 
                     song.setId( resultSet.getInt("id") );
                     song.setLengthCycle( resultSet.getInt("length_cycle") );
-                    song.setCountOfPoints( resultSet.getInt("count_of_points") );
                     song.setMode( resultSet.getString("mode") );
                     song.setBorderDown( resultSet.getInt("border_down") );
                     song.setMultiplicationHz( resultSet.getDouble("multiplication_hz") );
+                    song.setDurationSound(resultSet.getInt("duration_sound"));
                     song.setVolume( resultSet.getInt("volume") );
-                    song.setSpeed( resultSet.getInt("speed") );
+                    song.setDelayCycle( resultSet.getInt("delay_cycle") );
 
                     songs.add(song);
                 }else{

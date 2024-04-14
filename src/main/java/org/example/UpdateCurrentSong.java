@@ -13,13 +13,15 @@ public class UpdateCurrentSong {
     private Numbers numbers;
     private Sound sound;
     private CanvasFrame canvas;
+    private Delay delay;
     //------------------
     private List<Song> songs = new ArrayList<>();
 
-    public UpdateCurrentSong(Numbers numbers, Sound sound, CanvasFrame canvasFrame) {
+    public UpdateCurrentSong(Numbers numbers, Sound sound, CanvasFrame canvasFrame,Delay delay) {
         this.numbers = numbers;
         this.sound = sound;
         this.canvas = canvasFrame;
+        this.delay = delay;
     }
 
     public void setSongs(List<Song> songs) {
@@ -29,16 +31,18 @@ public class UpdateCurrentSong {
     public void updateSong(Song song){
         numbers
                 .setDistance(song.getLengthCycle())
-                .setCountOfPoints(song.getCountOfPoints())
                 .setMode(song.getMode())
                 .setBorderDown(song.getBorderDown())
                 .setMultiplicationHz(song.getMultiplicationHz())
                 .apply();
         sound
                 .setVolume(song.getVolume())
-                .setSpeed(song.getSpeed());
+                .setDuration(song.getDurationSound());
         canvas
-                .setAutoMultiplications(song.getLengthCycle());
+                .setAutoMultiplicationX(song.getLengthCycle())
+                .setAutoMultiplicationY(song.getLengthCycle()/2);
+        delay
+                .setDelay(song.getDelayCycle());
     }
 
     int numberOfSong = -1;

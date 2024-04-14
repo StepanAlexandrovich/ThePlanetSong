@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.audibility.Sound;
 import org.example.core.Numbers;
+import org.example.core.NumbersSmooth;
 import org.example.core.Test;
 import org.example.database.QueriesToDataBase;
 import org.example.listeners.MouseListenerImpl;
@@ -10,11 +11,13 @@ import org.example.visibility.FrameSettings;
 
 public class Main {
     private Numbers numbers = new Numbers();
+    private NumbersSmooth numbersSmooth = new NumbersSmooth(numbers,20);
     //----------------
     private CanvasFrame canvasFrame = new CanvasFrame();
     private Sound sound = new Sound();
+    private Delay delay = new Delay(30);
     //----------------------
-    private UpdateCurrentSong updateCurrentSong = new UpdateCurrentSong(numbers,sound,canvasFrame);
+    private UpdateCurrentSong updateCurrentSong = new UpdateCurrentSong(numbers,sound,canvasFrame,delay);
     private QueriesToDataBase queries = new QueriesToDataBase();
     private Song current_song = null;
 
@@ -40,13 +43,16 @@ public class Main {
         sound.open();
 
         while (true){
-            Helper.sleep(1);
+            delay.process();
+
             switch (mode){
                 case PROCESS :
-                    canvasFrame.update(numbers.getDistances());
-                    sound.process((int)(numbers.getValue()));
+                    if(numbersSmooth.beat()){
+                        new Thread(()->{ sound.process((numbersSmooth.getValue())); }).start();
+                    }
 
-                    numbers.process();
+                    canvasFrame.update(numbersSmooth.getPointSmooths());
+                    numbersSmooth.process();
 
                     //test.test(sound);
                     break;
@@ -81,7 +87,6 @@ public class Main {
             mode = Mode.PROCESS;
         }
     }
-
     public void nextSong(){
         mode = Mode.NEXT;
     }

@@ -28,9 +28,6 @@ public class ConnectionToDataBase {
     }
 
     //-----------------------------
-    public void createDataBase(){
-
-    }
 
     public ResultSet getResultSet(String query) {
         try {

@@ -17,7 +17,7 @@ public class Helper {
         return vel;
     }
     
-    public static void sleep(int value){
+    public static void sleep(long value){
         try {
             Thread.sleep(value);
         } catch (InterruptedException ex) {

@@ -1,6 +1,7 @@
 package org.example.visibility;
 
 import org.example.PS;
+import org.example.core.PointSmooth;
 
 import javax.swing.*;
 import java.awt.event.MouseListener;
@@ -44,8 +45,8 @@ public class CanvasFrame extends JFrame {
         this.setVisible(true);
     }
 
-    public void update(int[] values){
-        render.process(values);
+    public void update(List<PointSmooth> pointSmooths){
+        render.process(pointSmooths);
         repaint();
     }
 
@@ -55,7 +56,13 @@ public class CanvasFrame extends JFrame {
             button.addMouseListener(mouseListener);
         }
     }
-    public void setAutoMultiplications(int countOfPoints){
-        render.setAutoMultiplication(countOfPoints);
+    public CanvasFrame setAutoMultiplicationX(int countOfPoints){
+        render.setAutoMultiplicationX(countOfPoints);
+        return this;
+    }
+
+    public CanvasFrame setAutoMultiplicationY(int maxSpeed){
+        render.setAutoMultiplicationY(maxSpeed);
+        return this;
     }
 }

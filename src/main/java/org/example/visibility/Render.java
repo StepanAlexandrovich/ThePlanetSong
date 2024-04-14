@@ -1,7 +1,10 @@
 package org.example.visibility;
 
+import org.example.core.PointSmooth;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class Render {
     private int width,height,margin;
@@ -32,26 +35,28 @@ public class Render {
     public BufferedImage getImage(){ return image; }
 
     // set ------
+    // set ------
     public void setMultiplication(double multiplicationX,double multiplicationY) {
         this.multiplicationX = multiplicationX;
         this.multiplicationY = multiplicationY;
     }
 
-    public void setAutoMultiplication(int countOfPoints){
+    public void setAutoMultiplicationX(int countOfPoints){
         multiplicationX = (double)widthIn/(double)countOfPoints;
-        multiplicationY = (double)heightIn/(double)countOfPoints;
     }
 
-    public void process(int[] values) {
+    public void setAutoMultiplicationY(int maxSpeed){
+        multiplicationY = (double)heightIn/(double)maxSpeed;
+    }
+
+    public void process(List<PointSmooth> points) {
         g.setColor(Color.GREEN);
         g.fillRect(0,0,width,height);
 
-        for (int i = 0; i<values.length; i++) {
-            int x = (int) ((double)values[i]*multiplicationX) + margin;
-            int y = (int) ((double)i*multiplicationY) + margin;
-
-            if(i==0){ g.setColor(Color.RED); } else
-            if(i >0){ g.setColor(Color.BLACK); }
+        g.setColor(Color.BLACK);
+        for (PointSmooth point : points) {
+            int x = (int) (point.getDistance()*multiplicationX) + margin;
+            int y = (int) (point.getSpeed()*multiplicationY) + margin;
 
             g.fillOval(x-5,y-5,10,10);
         }
