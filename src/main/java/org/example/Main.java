@@ -11,13 +11,13 @@ import org.example.visibility.FrameSettings;
 
 public class Main {
     private Numbers numbers = new Numbers();
-    private NumbersSmooth numbersSmooth = new NumbersSmooth(numbers,20);
+    private NumbersSmooth numbersSmooth = new NumbersSmooth();
     //----------------
     private CanvasFrame canvasFrame = new CanvasFrame();
     private Sound sound = new Sound();
-    private Delay delay = new Delay(30);
+    private Delay delay = new Delay();
     //----------------------
-    private UpdateCurrentSong updateCurrentSong = new UpdateCurrentSong(numbers,sound,canvasFrame,delay);
+    private UpdateCurrentSong updateCurrentSong = new UpdateCurrentSong(numbers,numbersSmooth,sound,canvasFrame,delay);
     private QueriesToDataBase queries = new QueriesToDataBase();
     private Song current_song = null;
 
@@ -32,6 +32,7 @@ public class Main {
     }
 
     private void start(){
+        numbersSmooth.setNumbers(numbers);
         canvasFrame.setMouseListener(new MouseListenerImpl(this));
 
         //queries.createDataBase();

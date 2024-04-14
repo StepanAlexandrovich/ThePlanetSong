@@ -16,4 +16,5 @@ public class PS {
     public final static String VOLUME = "VOLUME";
     public final static String DURATION_SOUND = "DURATION_SOUND";
     public final static String DELAY_CYCLE = "DELAY_CYCLE";
+    public final static String SMOOTHNESS = "SMOOTHNESS";
 }

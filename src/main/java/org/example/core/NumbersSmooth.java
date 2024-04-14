@@ -5,17 +5,24 @@ import java.util.List;
 
 public class NumbersSmooth {
     private Numbers numbers;
-    private int length;
+    private int smoothness;
     private int step = 0;
-    public NumbersSmooth(Numbers numbers, int length) {
+    public NumbersSmooth setNumbers(Numbers numbers) {
         this.numbers = numbers;
-        this.length = length;
+        return this;
+    }
+    public NumbersSmooth setSmoothness(int smoothness) {
+        this.smoothness = smoothness;
+        return this;
     }
     public void process(){
-        if(++step == length){
+        if(++step == smoothness){
             step = 0;
             numbers.process();
         }
+    }
+    public void apply(){
+        step = 0;
     }
     public boolean beat(){ return step == 0; }
     public int getValue(){ return numbers.getValue(); }
@@ -25,7 +32,7 @@ public class NumbersSmooth {
 
         for (Point point : points) {
             double distance1 = point.getDistanceNow();
-            double distance2 = point.getSpeed() * ( (double)step/(double)length );
+            double distance2 = point.getSpeed() * ( (double)step/(double) smoothness);
 
             PointSmooth pointSmooth = new PointSmooth();
             pointSmooth.setDistance(distance1 + distance2);

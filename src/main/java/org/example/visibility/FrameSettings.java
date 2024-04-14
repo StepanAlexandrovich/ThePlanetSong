@@ -38,6 +38,7 @@ public class FrameSettings extends JFrame{
         this.add(createPanel(PS.VOLUME,"5"));
         this.add(createPanel(PS.DURATION_SOUND,"300"));
         this.add(createPanel(PS.DELAY_CYCLE,"10"));
+        this.add(createPanel(PS.SMOOTHNESS,"20"));
 
         this.add(createButton("apply"));
 
@@ -82,6 +83,7 @@ public class FrameSettings extends JFrame{
                     case PS.VOLUME: song.setVolume(Integer.parseInt(field.getText())); break;
                     case PS.DURATION_SOUND: song.setDurationSound(Integer.parseInt(field.getText())); break;
                     case PS.DELAY_CYCLE: song.setDelayCycle(Integer.parseInt(field.getText())); break;
+                    case PS.SMOOTHNESS: song.setSmoothness(Integer.parseInt(field.getText())); break;
                 }
             }
 

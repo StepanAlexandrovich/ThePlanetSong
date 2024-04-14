@@ -29,16 +29,17 @@ public class QueriesToDataBase {
         connection.getResultUpdate("Alter table song_smooth add column if not exists volume integer NOT NULL");
 
         connection.getResultUpdate("Alter table song_smooth add column if not exists delay_cycle integer NOT NULL");
+        connection.getResultUpdate("Alter table song_smooth add column if not exists smoothness integer NOT NULL");
     }
 
     public void addSong(Song song){
-        connection.getResultUpdate("INSERT INTO public.song_smooth(length_cycle, multiplication_hz, border_down, mode, duration_sound, volume, delay_cycle) VALUES ("+song.getLengthCycle() +","+song.getMultiplicationHz()+","+song.getBorderDown()+",'"+song.getMode()+"',"+song.getDurationSound()+","+song.getVolume()+","+song.getDelayCycle()+")");
+        connection.getResultUpdate("INSERT INTO public.song_smooth(length_cycle, multiplication_hz, border_down, mode, duration_sound, volume, delay_cycle,smoothness) VALUES ("+song.getLengthCycle() +","+song.getMultiplicationHz()+","+song.getBorderDown()+",'"+song.getMode()+"',"+song.getDurationSound()+","+song.getVolume()+","+song.getDelayCycle()+","+song.getSmoothness()+")");
     }
 
     public List<Song> getSongs(){
         List<Song> songs = new ArrayList<>();
 
-        ResultSet resultSet = connection.getResultSet("SELECT id, length_cycle, multiplication_hz, border_down, mode, duration_sound, volume, delay_cycle FROM public.song_smooth");
+        ResultSet resultSet = connection.getResultSet("SELECT id, length_cycle, multiplication_hz, border_down, mode, duration_sound, volume, delay_cycle, smoothness FROM public.song_smooth");
 
         while (true){
 
@@ -54,6 +55,7 @@ public class QueriesToDataBase {
                     song.setDurationSound(resultSet.getInt("duration_sound"));
                     song.setVolume( resultSet.getInt("volume") );
                     song.setDelayCycle( resultSet.getInt("delay_cycle") );
+                    song.setSmoothness( resultSet.getInt("smoothness") );
 
                     songs.add(song);
                 }else{

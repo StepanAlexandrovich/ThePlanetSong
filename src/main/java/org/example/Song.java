@@ -10,6 +10,7 @@ public class Song {
     private int volume;
     private int durationSound;
     private long delayCycle;
+    private int smoothness;
 
     public int getId() {
         return id;
@@ -64,8 +65,9 @@ public class Song {
     public long getDelayCycle() {
         return delayCycle;
     }
-
     public void setDelayCycle(int delayCycle) {
         this.delayCycle = delayCycle;
     }
+    public int getSmoothness() { return smoothness; }
+    public void setSmoothness(int smoothness) { this.smoothness = smoothness; }
 }

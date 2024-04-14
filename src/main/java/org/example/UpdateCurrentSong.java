@@ -3,6 +3,7 @@ package org.example;
 
 import org.example.audibility.Sound;
 import org.example.core.Numbers;
+import org.example.core.NumbersSmooth;
 import org.example.visibility.CanvasFrame;
 
 import java.util.ArrayList;
@@ -11,17 +12,19 @@ import java.util.List;
 public class UpdateCurrentSong {
     //-------------------------------
     private Numbers numbers;
+    private NumbersSmooth numbersSmooth;
     private Sound sound;
     private CanvasFrame canvas;
-    private Delay delay;
+    private Delay delayCycle;
     //------------------
     private List<Song> songs = new ArrayList<>();
 
-    public UpdateCurrentSong(Numbers numbers, Sound sound, CanvasFrame canvasFrame,Delay delay) {
+    public UpdateCurrentSong(Numbers numbers, NumbersSmooth numbersSmooth, Sound sound, CanvasFrame canvasFrame, Delay delayCycle) {
         this.numbers = numbers;
+        this.numbersSmooth = numbersSmooth;
         this.sound = sound;
         this.canvas = canvasFrame;
-        this.delay = delay;
+        this.delayCycle = delayCycle;
     }
 
     public void setSongs(List<Song> songs) {
@@ -35,13 +38,16 @@ public class UpdateCurrentSong {
                 .setBorderDown(song.getBorderDown())
                 .setMultiplicationHz(song.getMultiplicationHz())
                 .apply();
+        numbersSmooth
+                .setSmoothness(song.getSmoothness())
+                .apply();
         sound
                 .setVolume(song.getVolume())
                 .setDuration(song.getDurationSound());
         canvas
                 .setAutoMultiplicationX(song.getLengthCycle())
                 .setAutoMultiplicationY(song.getLengthCycle()/2);
-        delay
+        delayCycle
                 .setDelay(song.getDelayCycle());
     }
 
